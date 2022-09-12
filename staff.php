@@ -1,4 +1,14 @@
 <?php
+  session_start();
+  $login=$_SESSION['name'];
+  if(isset($login))
+  {
+  }
+  else{
+    header("Location:index.php");
+  }
+?>
+<?php
 include 'conn.php';
 if(isset($_POST['done']))
 {
@@ -8,9 +18,10 @@ if(isset($_POST['done']))
  $phone=$_POST['phone'];
  $email=$_POST['email'];
  $gender=$_POST['gender'];
+ $password= password_hash(md5(mysqli_real_escape_string($con,'password')),PASSWORD_DEFAULT);
 
- $q="INSERT INTO staff(staff_id,names, type, phone,  email, gender)
-		VALUES ( '$staff_id','$names','$type','$phone','$email','$gender');";
+ $q="INSERT INTO staff(staff_id,names, type, phone,  email, gender, password)
+		VALUES ( '$staff_id','$names','$type','$phone','$email','$gender','$password');";
  mysqli_query($con,$q);
  header('Location:index.php');
 }
@@ -23,14 +34,8 @@ if(isset($_POST['done']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
     <title>Staff Registration</title>
-</head>
-<body>
-    <div>
-        <img src="stmarklogo.png" alt="St. Marks Kiserian" style="float:left">
-        <span style="display:flex;justify-content:flex-end;margin:8px;"><a href="index.php"><button type="button" class="btn btn-secondary">Back</button></a></span>  
-        <br><br>
-    </div>
-    <h2 style="text-align:center;">Enter Staff Details</h2>
+<?php include_once 'common/navbar.php';?>
+        <h2 style="text-align:center;">Enter Staff Details</h2>
     <form method="post">
         <div class="input-group mb-3">
             <span class="input-group-text">Staff&nbspId.:</span>
