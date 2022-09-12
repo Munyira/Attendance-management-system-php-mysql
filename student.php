@@ -1,4 +1,14 @@
 <?php
+  session_start();
+  $login=$_SESSION['name'];
+  if(isset($login))
+  {
+  }
+  else{
+    header("Location:index.php");
+  }
+?>
+<?php
 include 'conn.php';
 if(isset($_POST['done']))
 {
@@ -23,13 +33,10 @@ if(isset($_POST['done']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
     <title>Student Registration</title>
-</head>
-<body>
-    <div>
-    <img src="stmarklogo.png" alt="St. Marks Kiserian" style="float:left">
-    <span style="display:flex;justify-content:flex-end;margin:8px;"><a href="index.php"><button type="button" class="btn btn-secondary">Back</button></a></span>  
-    <br><br>
-    </div>
+    <?php
+include_once 'common/navbar.php';
+?>
+    
     <div><h2 style="text-align:center;">Enter Student Details</h2></div>
         <form method="post">
                         
@@ -56,6 +63,14 @@ if(isset($_POST['done']))
             <div class="input-group mb-3">
                 <span class="input-group-text">Stream&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</span>
                 <select name="stream" class="form-select form-select-sm" required>
+                    <?php 
+                        if(isset($_POST['form'])){
+                            $q="select distinct from classes where form='form'";
+                            $query=mysqli_query($con,$q);
+                            while($res=mysqli_fetch_array($query)) {}}
+                            ?>
+                            <option>                            </option>
+                        
                     <option value="Alpha">Alpha</option>
                     <option value="Beta">Beta</option>
                     <option value="Gamma">Gamma</option>

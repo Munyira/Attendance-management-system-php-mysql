@@ -14,7 +14,7 @@ function Header()
 {
     // Logo
     $this->Ln(3);
-    $this->Image('../stmarklogo.png',10,8,70);
+    $this->Image('../images/stmarklogo.png',10,8,70);
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     $chosenform = $_SESSION['chosenform'];

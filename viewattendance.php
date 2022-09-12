@@ -1,4 +1,14 @@
 <?php
+  session_start();
+  $login=$_SESSION['name'];
+  if(isset($login))
+  {
+  }
+  else{
+    header("Location:index.php");
+  }
+?>
+<?php
  include 'conn.php';
 ?> 
 <!DOCTYPE html>
@@ -9,8 +19,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
     <title> Mark Attendance</title>
-</head>
-<body>
+    <?php
+include_once 'common/navbar.php';
+?>
     <form method=post>
         <span><label><b>Form</b></label>
                 <select name="chosenf" required>
@@ -35,12 +46,7 @@
                 
         </span>
         </form>
-                <br>
-                <div>
-                    <img src="stmarklogo.png" alt="St. Marks Kiserian" style="float:left">
-                    <span style="display:flex;justify-content:flex-end;margin:8px;"><a href="index.php"><button type="button" class="btn btn-secondary">Back</button></a></span>  
-                    <br><br>
-                </div>
+                
     <h2 style="text-align:center;margin-bottom:0;padding-bottom:0;"><?php   error_reporting(0);
                                         $chosenform=$_POST['chosenf'];
                                         $chosenstream=$_POST['chosens'];
